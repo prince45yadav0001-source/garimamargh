@@ -1,0 +1,7 @@
+const API=window.GMARG_API_BASE||"/api";
+async function api(path,options={}){const res=await fetch(API+path,{credentials:"include",...options});if(res.status===401||res.status===403){location.href="client-login.html";throw new Error("Unauthorized")}return res.json()}
+async function init(){const [profile,inquiries]=await Promise.all([api("/client/profile"),api("/client/inquiries")]);document.getElementById("clientName").textContent=`Welcome, ${profile.name||profile.email}`;document.getElementById("profileEmail").textContent=profile.email;document.getElementById("clientInquiryRows").innerHTML=inquiries.map(i=>`<tr><td>${i.id}</td><td>${escapeHtml(i.message)}</td><td>${i.status}</td></tr>`).join("")}
+function escapeHtml(v=""){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"})[c])}
+document.getElementById("logoutBtn").addEventListener("click",async()=>{await fetch(`${API}/auth/logout`,{method:"POST",credentials:"include"});location.href="login.html"});
+document.getElementById("inquiryForm").addEventListener("submit",async e=>{e.preventDefault();const body=Object.fromEntries(new FormData(e.currentTarget));const res=await fetch(`${API}/client/inquiries`,{method:"POST",credentials:"include",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});if(res.ok){e.currentTarget.reset();init()}});
+init().catch(()=>{});

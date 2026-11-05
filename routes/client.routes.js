@@ -1,0 +1,3 @@
+const router=require("express").Router(),{z}=require("zod");const protect=require("../middleware/auth.middleware"),role=require("../middleware/role.middleware"),{validate}=require("../middleware/validation.middleware");const client=require("../controllers/client.controller");
+const asyncHandler=require("../middleware/async-handler");
+router.use(protect,role("client"));router.get("/profile",asyncHandler(client.profile));router.get("/inquiries",asyncHandler(client.inquiries));router.post("/inquiries",validate(z.object({name:z.string().trim().min(2).max(120),email:z.string().email(),phone:z.string().max(30).optional().default(""),message:z.string().trim().min(5).max(5000)})),asyncHandler(client.createInquiry));module.exports=router;

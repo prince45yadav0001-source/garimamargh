@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Client Login</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <header class="header"><nav class="nav"><a class="brand" href="../index.html"><img src="../assets/logo.png" alt="GMARG" class="brand-logo"><span class="brandname">ग्राफिक मार्ग प्रा. लि.</span></a></nav></header>
+  <main class="login-shell">
+    <section class="login-card">
+      <div id="clientLoginPanel">
+        <p class="eyebrow">Client portal</p>
+        <h1>Client Login</h1>
+        <div class="notice" id="loginNotice"></div>
+        <form class="form" id="clientLoginForm">
+          <input name="email" type="email" required placeholder="Client email">
+          <input name="password" type="password" required placeholder="Password">
+          <button class="cta" type="submit">Login</button>
+        </form>
+        <p><a href="#" id="clientForgotLink">Forgot password?</a></p>
+        <p>New client? <a href="#" id="showRegisterLink">Register an account</a></p>
+      </div>
+
+      <div id="clientRegisterPanel" hidden>
+        <p class="eyebrow">Create an account</p>
+        <h1>Client Registration</h1>
+        <div class="notice" id="registerNotice"></div>
+        <form class="form" id="clientRegisterForm">
+          <input name="name" type="text" minlength="2" maxlength="120" required placeholder="Full name">
+          <input name="email" type="email" maxlength="190" required placeholder="Email address">
+          <input name="phone" type="tel" minlength="7" maxlength="30" required placeholder="Phone number">
+          <input name="password" type="password" minlength="8" maxlength="128" required placeholder="Password">
+          <input name="confirmPassword" type="password" minlength="8" maxlength="128" required placeholder="Confirm password">
+          <button class="cta" type="submit">Register</button>
+        </form>
+        <p><a href="#" id="backToClientLogin">← Back to client login</a></p>
+      </div>
+
+      <div id="clientForgotPanel" hidden>
+        <p class="eyebrow">Client password recovery</p>
+        <h1>Forgot Password</h1>
+        <div class="notice" id="clientForgotNotice"></div>
+        <p>Client password recovery requires OTP delivery integration and is not currently enabled.</p>
+        <p><a href="#" id="backFromClientForgot">← Back to client login</a></p>
+      </div>
+    </section>
+  </main>
+  <script src="../js/api-config.js"></script>
+  <script src="../js/client-auth.js"></script>
+</body>
+</html>
